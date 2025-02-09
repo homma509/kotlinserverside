@@ -38,3 +38,10 @@ kotlin {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+detekt {
+    config = files(
+        "$projectDir/config/detekt/detekt.yml",
+        "$projectDir/config/detekt/detekt-override.yml",
+    )
+}
