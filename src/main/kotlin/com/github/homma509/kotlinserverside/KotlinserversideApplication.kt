@@ -16,7 +16,8 @@ class KotlinserversideApplication
  * サンプルアプリケーションのメイン関数
  *
  * @param args
- */fun main(args: Array<String>) {
+ */
+fun main(args: Array<String>) {
     @Suppress("SpreadOperator")
     runApplication<KotlinserversideApplication>(*args)
 }
