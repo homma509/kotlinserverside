@@ -4,6 +4,7 @@ plugins {
 	id 'org.springframework.boot' version '3.4.2'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id("io.gitlab.arturbosch.detekt") version "1.23.5"
+    id("org.jetbrains.dokka") version "1.9.10"
 }
 
 group = 'com.github.homma509'
@@ -27,6 +28,15 @@ dependencies {
 	testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0")
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.9.20")
+}
+
+configurations.matching { it.name.startsWith("dokka") }.configureEach {
+    resolutionStrategy.eachDependency {
+        if (requested.group.startsWith("com.fasterxml.jackson")) {
+            useVersion("2.15.3")
+        }
+    }
 }
 
 kotlin {
