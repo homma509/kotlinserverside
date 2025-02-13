@@ -5,6 +5,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
 	id("io.gitlab.arturbosch.detekt") version "1.23.5"
     id("org.jetbrains.dokka") version "1.9.10"
+	id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
 }
 
 group = 'com.github.homma509'
@@ -33,6 +34,8 @@ dependencies {
 	testImplementation("org.assertj:assertj-core:3.25.2")
 	testImplementation("net.jqwik:jqwik:1.8.2")
 	testImplementation("net.jqwik:jqwik-kotlin:1.8.2")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 }
 
 configurations.matching { it.name.startsWith("dokka") }.configureEach {
@@ -58,4 +61,10 @@ detekt {
         "$projectDir/config/detekt/detekt.yml",
         "$projectDir/config/detekt/detekt-override.yml",
     )
+}
+
+openApi {
+	apiDocsUrl.set("http://localhost:8080/v3/api-docs.yaml")
+	outputDir.set(project.layout.buildDirectory.dir("springdoc"))
+	outputFileName.set("openapi.yaml")
 }
