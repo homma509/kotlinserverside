@@ -64,7 +64,11 @@ class ShowArticleUseCaseImpl(val articleRepository: ArticleRepository) : ShowArt
          *
          * 取得失敗した場合、早期 return
          */
-        val createdArticle = articleRepository.findBySlug(validatedSlug).getOrElse { TODO() }
+        val createdArticle = articleRepository.findBySlug(validatedSlug).getOrElse {
+            return when(it) {
+                is ArticleRepository.FindBySlugError.NotFound -> ShowArticleUseCase.Error.NotFoundArticleBySlug(it.slug).left()
+            }
+        }
 
         return createdArticle.right()
     }
