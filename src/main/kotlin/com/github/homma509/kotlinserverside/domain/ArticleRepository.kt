@@ -22,7 +22,7 @@ interface ArticleRepository {
     sealed interface FindBySlugError {
         /**
          * slug に該当する記事が見つからなかった
-         * 
+         *
          * @property slug
          */
         data class NotFound(val slug: Slug) : FindBySlugError
