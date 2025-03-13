@@ -139,7 +139,7 @@ class ArticleController(val showArticleUseCase: ShowArticleUseCase) {
             is ShowArticleUseCase.Error.NotFoundArticleBySlug -> ResponseEntity<GenericErrorModel>(
                 GenericErrorModel(
                     errors = GenericErrorModelErrors(
-                        body = listOf("${error.slug} に該当する記事は見つかりませんでした")
+                        body = listOf("${error.slug.value} に該当する記事は見つかりませんでした")
                     )
                 ),
                 HttpStatus.NOT_FOUND
